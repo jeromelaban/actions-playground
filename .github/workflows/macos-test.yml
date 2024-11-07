@@ -1,0 +1,29 @@
+name: Azure Static Web Apps CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_and_deploy_job:
+    runs-on: macos-15
+    name: Build and Deploy Job
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # Required for gitversion
+          submodules: true
+
+      - run: |
+          /bin/bash -c "sudo xcode-select -s /Applications/Xcode_16.app/Contents/Developer"
+        name: list simulators
+
+      - run: |
+          echo "Listing iOS simulators"
+          xcrun simctl list devices --json
+        name: list simulators
+        
+      - run: |
+          xcrun simctl boot
+        name: boot simulator
