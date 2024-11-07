@@ -25,7 +25,7 @@ jobs:
           export UNO_UITEST_SIMULATOR_NAME="iPad Pro 13-inch (M4)"
 
           export UITEST_IOSDEVICE_ID=`xcrun simctl list -j | jq -r --arg sim "$UNO_UITEST_SIMULATOR_VERSION" --arg name "$UNO_UITEST_SIMULATOR_NAME" '.devices[$sim] | .[] | select(.name==$name) | .udid'`
-          xcrun simctl boot
+          xcrun simctl boot $UITEST_IOSDEVICE_ID
 
           sleep 300
         name: Run
